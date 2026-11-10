@@ -1,0 +1,34 @@
+name: clinic-registration
+
+services:
+  db:
+    image: postgres:18
+    container_name: clinic-db
+    environment:
+      POSTGRES_USER: clinic
+      POSTGRES_PASSWORD: clinic_dev_password   # local dev only
+      POSTGRES_DB: clinic                      # created on first start
+    ports:
+      - "5432:5432"                            # host:container
+    volumes:
+      - pgdata:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U clinic -d clinic"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    storage_opt:
+      size: '1G'
+  # api:
+  #   build:
+  #     context: ./api
+  #     dockerfile: Dockerfile
+  #   container_name: clinic-api
+  #   depends_on:
+  #     db:
+  #       condition: service_healthy
+  #   ports:
+  #     - "8000:8080"                            # host:container
+volumes:
+  pgdata:
+    name: clinic-pgdata
