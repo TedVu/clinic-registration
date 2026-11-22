@@ -18,17 +18,7 @@ services:
       timeout: 3s
       retries: 10
     storage_opt:
-      size: '1G'
-  # api:
-  #   build:
-  #     context: ./api
-  #     dockerfile: Dockerfile
-  #   container_name: clinic-api
-  #   depends_on:
-  #     db:
-  #       condition: service_healthy
-  #   ports:
-  #     - "8000:8080"                            # host:container
+      size: '1G'                      # host:container
 volumes:
   pgdata:
     name: clinic-pgdata
