@@ -16,9 +16,7 @@ services:
       test: ["CMD-SHELL", "pg_isready -U clinic -d clinic"]
       interval: 5s
       timeout: 3s
-      retries: 10
-    storage_opt:
-      size: '1G'                      # host:container
+      retries: 10                     # host:container
 volumes:
   pgdata:
     name: clinic-pgdata
